@@ -351,7 +351,6 @@
     /* Критично важливо, якщо батько має display: flex! */
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    border: 1px solid red; 
     margin-top: 10px;
 }
 
