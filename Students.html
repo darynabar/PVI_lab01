@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<header class="main-header">
+
+    
+    <div class="logo">
+        <button class="burger" id="burger">☰</button>
+        <a href="Students.html">CMS</a>
+    </div>
+
+    <div class="user-profile">
+        <div class="notification-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bell-icon"
+                viewBox="0 0 16 16">
+                <path
+                    d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
+            </svg>
+            <span class="dot"></span>
+
+            <div class="message-dropdown">
+                <ul>
+                    <li>
+                        <img src="./image/avatar.jpg" alt="Avatar image" class="avatar-image">
+                        <div class="user-block">
+                             <span class="name-avatar">Nastia</span>
+                            <p class="user-message">Lorem ipsum.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="./image/avatar.jpg" alt="Avatar image" class="avatar-image">
+                        <div class="user-block">
+                            <span class="name-avatar">Nastia</span>
+                            <p class="user-message">Lorem ipsum dolor sit.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="./image/avatar.jpg" alt="Avatar image" class="avatar-image">
+                        <div class="user-block">
+                             <span class="name-avatar">Nastia</span>
+                            <p class="user-message">Lorem ipsum dolor sit.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+<div class="user-dropdown">
+        <div class="user-info">
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-person-circle"
+                    viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                    <path fill-rule="evenodd"
+                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                </svg>
+            
+            
+            <span class="user-name" id="current-user">Baranova Daryna</span>
+        
+        </div>
+        
+        <div class="user-profile log">
+            <ul>
+                <li>Profile</li>
+                <li>Log Out</li>
+            </ul>
+        </div>
+
+</div>
+    
+    </div>
+</header>
+
+
+<main>
+    <div class="sitebar-content">
+
+        <div class="sitebar" id="sidebar">
+            <aside>
+                <nav class="nav-sitebar">
+                    <a class = "link-sitebar" href="Dashboard.html">Dashboard</a>
+                    <a class = "link-sitebar active-menu" href="Students.html">Students</a>
+                    <a class = "link-sitebar" href="Tasks.html">Tasks</a>
+                </nav>
+            </aside>
+        </div>
+
+
+
+        <div class="student-content">
+            <div class="student-button">
+                <h1>Students</h1>
+                <div class="buttons">
+                    <button class="add-button">+</button>
+                    <button id="allDelete-button" class="delete-all-btn">delete</button>
+
+                </div>
+               
+            </div>
+        
+            <div class="table-wrapper">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="checkbox-select-all"></th>
+                            <th>Group</th>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Birthday</th>
+                            <th>Status</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" name="select-student" ></td>
+                            <td>PZ-21</td>
+                            <td class="user-name">John Smith</td>
+                            <td>M</td>
+                            <td>11.06.2004</td>
+                            <td>
+                                <span class="status-circle status-inactive"></span>
+                
+                            </td>
+                            <td>
+                                <button class="editBtn">✏️</button>
+                                <button class="deleteBtn">❌</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+
+            <div class="pagination">
+                <nav>
+                    <ul class="button-pagination">
+                        <li><button class="btn-pagination">&#60;</button></li>
+                        <li><button class="btn-pagination" id="active">1</button></li>
+                        <li><button class="btn-pagination">2</button></li>
+                        <li><button class="btn-pagination">3</button></li>
+                        <li><button class="btn-pagination">4</button></li>
+                        <li><button class="btn-pagination">&#62;</button></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div id="modalOverlay" class="modal-overlay">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h2 class="modal-title">Add student</h2>
+            <button class="close-modal-btn" id="closeModal">&times;</button>
+        </div>
+        <form id="addStudentForm" class="modal-form">
+            <div class="form-row">
+                <label for="group">Group</label>
+                <select id="group" name="group" required>
+                    <option value="" disabled selected>Select Group</option>
+                    <option value="PZ-21">PZ-21</option>
+                    <option value="PZ-22">PZ-22</option>
+                    <option value="PZ-23">PZ-23</option>
+                    <option value="PZ-24">PZ-24</option>
+                    <option value="PZ-25">PZ-25</option>
+                    <option value="PZ-26">PZ-26</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="firstName">First name</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-row">
+                <label for="lastName">Last name</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+            <div class="form-row">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="birthday">Birthday</label>
+                <input type="date" id="birthday" name="birthday" required>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+                <button type="submit" class="btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modalWarning">
+    <div class="modal-container">
+        <div class="modal-Warning">
+            <h2 class="modal-title">Warning</h2>
+            
+            <button class="close-warning-btn" id="closeWarning">&times;</button>
+        </div>
+        <p class="messageWarning">Are you sure you want to delete user <span class="delete"></span>?</p>
+        
+        <div class="buttonsWarning">
+            <button class="btn-cancel" id="cancelButton">Cancel</button>
+            <button class="btn-Ok" id="OkButton">Ok</button>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
