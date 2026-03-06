@@ -1,19 +1,19 @@
-*{
+*,
+*::before,
+*::after {
     box-sizing: border-box;
-    padding: 0;
     margin: 0;
-   
+    padding: 0;
+    /*outline: 1px solid red; /* Всі елементи по границях */
 }
 
 .main-header {
-    background-color: #999;
-    /* Сірий колір як на фото */
+    background-color: #64636e;
+    /* background-color: #465665; */
     color: white;
     display: flex;
-    justify-content: space-between;
-    /* Розносить блоки в різні боки */
-    align-items: center;
-    /* Центрує елементи по вертикалі */
+    justify-content: space-between; /* Розносить блоки в різні боки */
+    align-items: center; /* Центрує елементи по вертикалі */
     padding: 0 20px;
     height: 60px;
     font-family: Arial, sans-serif;
@@ -36,11 +36,15 @@
     gap: 10px;
 }
 
-
-
-.user-profile li {
+.user-profile li:hover {
+    transform: scale(1.075);
     cursor: pointer;
 }
+
+.user-profile li:active{
+    transform: scale(0.95);
+}
+
 
 .user-profile {
     display: flex;
@@ -73,7 +77,8 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    
+    background-color: transparent;  
+    color: white;  
 }
 
 .user-name {
@@ -226,20 +231,16 @@
         }
     
     .sitebar.active {
-        
             transform: translateX(0);
         }
 
 }
 
 .sitebar{
-    width: 200px;
-        /* Фіксована ширина */
-        min-width: 200px;
-        /* Щоб він не стискався менше цього значення */
-        background-color: #f4f4f4;
-        /* Світло-сірий фон, щоб бачити межі */
-        height: 100vh;
+    width: 200px; /* Фіксована ширина */
+    min-width: 200px; /* Щоб він не стискався менше цього значення */
+    background-color: #f4f4f4;/* Світло-сірий фон, щоб бачити межі */
+    height: 100vh;
     transition: transform 0.8s ease;    
         
 }
@@ -247,12 +248,20 @@
     display: flex;
     flex-direction:column ;
 }
+
 .student-content
 {
     flex-grow: 1;
     padding: 40px;
-    
+    min-width: 0; /* Ця біда для таблиці, означає, що елемент можна стискати до 0, щоб не вилазив контент за межі контейнера */
 }
+
+@media (max-width: 768px){
+    .student-content {
+        padding: 20px;
+    }
+}
+
 .student-button
 {
     display: flex;
@@ -344,11 +353,6 @@
 }
 
 .table-wrapper {
-    width: 100%;
-    max-width: 100vw;
-    /* Не дає обгортці стати ширшою за екран */
-    min-width: 0;
-    /* Критично важливо, якщо батько має display: flex! */
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     margin-top: 10px;
@@ -356,17 +360,19 @@
 
 .table {
     width: 100%;
-   
     border-collapse: collapse;
-    
 }
 
 @media (max-width: 768px){
-    .table{
+    .table {
         min-width: 700px;
     }
 }
 
+.title-select-all{
+    position: absolute;
+    top: -50px
+}
 
 th,
 td {
