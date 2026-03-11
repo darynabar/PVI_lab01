@@ -52,6 +52,10 @@ if (burger && sidebar) {
 // ------------------------------------------------------------
 
 const tableStudents = document.querySelector('.table');
+const btnedit= document.querySelector(".editBtn");
+const saveBtn = document.querySelector(".btn-primary");
+const hiddenIdInput = document.querySelector("#studentId");
+
 if (tableStudents) {
     const tableBody = document.querySelector('.table tbody');
     const modal = document.getElementById('modalOverlay');
@@ -67,6 +71,8 @@ if (tableStudents) {
     const mainCheckbox = document.getElementById('checkbox-select-all');
     const allDeleteBtn = document.getElementById('allDelete-button');
     let rowToDelete = null;
+    let rowToEdit = null;
+
     const okWarningBtn = document.querySelector(".btn-Ok");
     const delBtn = document.querySelector('.delete-all-btn');
 
@@ -80,68 +86,157 @@ if (tableStudents) {
 
     }
     
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
+   form.addEventListener('submit', function (event) {
+    // 1. Зупиняємо перезавантаження сторінки
+    event.preventDefault();
 
-        const group = document.getElementById('group').value;
-        const firstName = document.getElementById('firstName').value;
-        const lastName = document.getElementById('lastName').value;
-        const gender = document.getElementById('gender').value;
-        const birthdayInput = document.getElementById('birthday').value;
+    // 2. Зчитуємо ВСІ дані з форми
+    const firstNameInput = document.getElementById('firstName');
+    const firstNameError = document.getElementById('firstNameError');
+    const firstNameValue = firstNameInput.value.trim();
 
-        if (!group || !firstName || !lastName || !gender || !birthdayInput) {
-            alert("Помилка: Будь ласка, заповніть всі поля!");
-            return;
-        }
+    const lastNameInput = document.getElementById('lastName');
+    const lastNameError = document.getElementById('lastNameError'); 
+    const lastNameValue = lastNameInput.value.trim();
 
-        const studentFullName = `${lastName} ${firstName}`;
+    const groupInput = document.getElementById('group');
+    const groupValue = groupInput.value;
+
+    const genderInput = document.getElementById('gender');
+    const genderValue = genderInput.value;
+
+    const birthdayInput = document.getElementById('birthday');
+    const birthdayValue = birthdayInput.value;
+
+    let isValid = true; 
+
+    // 3. ВАЛІДАЦІЯ КОЖНОГО ПОЛЯ
+    const nameRegex = /^[A-Za-zА-Яа-яІіЇїЄєҐґ']+$/;
+
+    // Перевірка імені
+    if (!nameRegex.test(firstNameValue) || firstNameValue.length < 2) {
+        firstNameInput.classList.add('input-error');
+        if(firstNameError) firstNameError.classList.add('show');        
+        isValid = false; 
+    } else {
+        firstNameInput.classList.remove('input-error');
+        if(firstNameError) firstNameError.classList.remove('show');        
+    }
+
+    // Перевірка прізвища
+    if (!nameRegex.test(lastNameValue) || lastNameValue.length < 2) {
+        lastNameInput.classList.add('input-error');
+        if(lastNameError) lastNameError.classList.add('show');        
+        isValid = false; 
+    } else {
+        lastNameInput.classList.remove('input-error');
+        if(lastNameError) lastNameError.classList.remove('show');        
+    }
+
+    // Перевірка групи
+    if (groupValue === "") {
+        groupInput.classList.add('input-error');
+        isValid = false;
+    } else {
+        groupInput.classList.remove('input-error');
+    }
+
+    // Перевірка статі
+    if (genderValue === "") {
+        genderInput.classList.add('input-error');
+        isValid = false;
+    } else {
+        genderInput.classList.remove('input-error');
+    }
+
+    // Перевірка дати
+    if (birthdayValue === "") {
+        birthdayInput.classList.add('input-error');
+        isValid = false;
+    } else {
+        birthdayInput.classList.remove('input-error');
+    }
+
+    // Якщо хоч одне поле неправильне - зупиняємо код тут!
+    if (!isValid) {
+        return; 
+    }
+
+    // === 4. ЯКЩО ВСЕ ДОБРЕ - СТВОРЮЄМО СТУДЕНТА ===
     
-        const currentUserElement = document.getElementById('current-user');
-        let currentUserName = "";
+    const studentFullName = `${lastNameValue} ${firstNameValue}`;
     
-        if (currentUserElement) {
-            currentUserName = currentUserElement.innerText.trim();
-        }
+    const currentUserElement = document.getElementById('current-user');
+    let currentUserName = "";
+    if (currentUserElement) {
+        currentUserName = currentUserElement.innerText.trim();
+    }
 
-        let statusClass = '';
+    let statusClass = '';
+    if (studentFullName.toLowerCase() === currentUserName.toLowerCase()) {
+        statusClass = 'status-active';
+    } else {
+        statusClass = 'status-inactive';
+    }
 
-        if (studentFullName.toLowerCase() === currentUserName.toLowerCase()) {
-            statusClass = 'status-active';
-        } else {
-            statusClass = 'status-inactive';
-        }
+    const dateParts = birthdayValue.split('-');
+    const formattedBirthday = `${dateParts[2]}.${dateParts[1]}.${dateParts[0]}`;
 
-        const dateParts = birthdayInput.split('-');
-        const formattedBirthday = `${dateParts[2]}.${dateParts[1]}.${dateParts[0]}`;
+    // Якщо ми редагуємо студента
+    if (rowToEdit) {
+        const cells = rowToEdit.querySelectorAll("td");
+        cells[1].textContent = groupValue; // Використовуємо groupValue
+        cells[2].textContent = `${firstNameValue} ${lastNameValue}`;
+        cells[3].textContent = genderValue; // Використовуємо genderValue
+        cells[4].textContent = formattedBirthday;
 
+        const statusCircle = cells[5].querySelector('.status-circle');
+        statusCircle.className = `status-circle ${statusClass}`;
+    } 
+    // Якщо створюємо нового
+    else {
         const newRow = document.createElement('tr');
-
         newRow.innerHTML = `
-        <td><input type="checkbox" name="select-student" aria-label="Select student John Smith"></td>
-        <td>${group}</td>
-        <td class="user-name">${firstName} ${lastName}</td>
-        <td>${gender}</td>
+        <td><input type="checkbox" name="select-student" aria-label="Select student ${firstNameValue} ${lastNameValue}"></td>
+        <td>${groupValue}</td>
+        <td class="user-name">${firstNameValue} ${lastNameValue}</td>
+        <td>${genderValue}</td>
         <td>${formattedBirthday}</td>
         <td>
-            <span class="status-circle ${statusClass}" aria-label="Status: Inactive"></span>
+        <span class="status-circle ${statusClass}" aria-label="Status: Inactive"></span>
         </td>
-        <td>
-            <button class="editBtn" aria-label="Edit student John Smith">✏️</button>
-            <button class="deleteBtn" aria-label="Delete student John Smith">❌</button>
+         <td>
+        <button class="editBtn" aria-label="Edit student ${firstNameValue} ${lastNameValue}">✏️</button>
+        <button class="deleteBtn" aria-label="Delete student ${firstNameValue} ${lastNameValue}">❌</button>
         </td>
-    `;
-    
+        `;
+        
+        // Знаходимо таблицю і додаємо рядок
+        const tableBody = document.querySelector('.table tbody');
         tableBody.appendChild(newRow);
-        form.reset();
-        UpdateCheckbox();
-        modalOverlay.style.display = 'none';
-    });
+    }
+        
+    // 5. Очищення і закриття
+    form.reset();
+    rowToEdit = null;
+    hiddenIdInput.value = "";
+    UpdateCheckbox();
+    
+    const modalOverlay = document.getElementById('modalOverlay');
+    modalOverlay.style.display = 'none';
+});
+
 
     addBtn.onclick = () => {
+        form.reset();
+        rowToEdit = null;
+        hiddenIdInput.value = "";
         titleModal.textContent = "Add student";
         modal.style.display = 'flex';
+        saveBtn.textContent = "Create";
 
     };
+
 
     let isDeleteAllMode = false;
     delBtn.onclick = () => {
@@ -198,6 +293,26 @@ if (tableStudents) {
         
         const editBtn = e.target.closest(".editBtn");
         if (editBtn) {
+            rowToEdit = editBtn.closest("tr");
+
+            const cells = rowToEdit.querySelectorAll("td");
+            const group = cells[1].textContent;
+            const fullName = cells[2].textContent.split(" "); 
+            const firstName = fullName[0];
+            const lastName = fullName[1];
+            const gender = cells[3].textContent;
+            const birthdayRaw = cells[4].textContent;
+            const dateParts = birthdayRaw.split('.');
+            const formattedDateForInput = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+           
+            document.getElementById('group').value = group;
+            document.getElementById('firstName').value = firstName;
+            document.getElementById('lastName').value = lastName;
+            document.getElementById('gender').value = gender;
+            document.getElementById('birthday').value = formattedDateForInput;
+
+            hiddenIdInput.value = "editing";
+            saveBtn.textContent = "Save";
             titleModal.textContent = "Edit student";
             modal.style.display = 'flex';
             return;
@@ -234,4 +349,16 @@ if (tableStudents) {
         modalWarning.style.display = "none";
         UpdateCheckbox();
     });
+}
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('ServiceWorker успішно зареєстровано!', registration.scope);
+      })
+      .catch(error => {
+        console.log('Помилка реєстрації ServiceWorker:', error);
+      });
+  });
 }

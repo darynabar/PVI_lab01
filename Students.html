@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Students</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
@@ -152,7 +153,8 @@
                 <h2 class="modal-title" id="modalTitle">Add student</h2>
                 <button class="close-modal-btn" id="closeModal" aria-label="Close modal">&times;</button>
             </div>
-            <form id="addStudentForm" class="modal-form">
+            <form id="addStudentForm"  class="modal-form" autocomplete="off"  novalidate>
+                <input type="hidden" id="studentId" name="id" value="">
                 <div class="form-row">
                     <label for="group">Group</label>
                     <select id="group" name="group" required>
@@ -167,11 +169,13 @@
                 </div>
                 <div class="form-row">
                     <label for="firstName">First name</label>
-                    <input type="text" id="firstName" name="firstName" required>
+                    <input type="text" id="firstName" name="firstName" pattern="[A-Za-zА-Яа-яІіЇїЄєҐґ]+" required>
+                    <small id="firstNameError" class="error-message">Введіть коректне ім'я</small>
                 </div>
                 <div class="form-row">
                     <label for="lastName">Last name</label>
-                    <input type="text" id="lastName" name="lastName" required>
+                    <input type="text" id="lastName" name="lastName" pattern="[A-Za-zА-Яа-яІіЇїЄєҐґ]+" required>
+                    <small id="lastNameError" class="error-message">Введіть коректне прізвище</small>
                 </div>
                 <div class="form-row">
                     <label for="gender">Gender</label>
@@ -180,10 +184,11 @@
                         <option value="M">Male</option>
                         <option value="F">Female</option>
                     </select>
+
                 </div>
                 <div class="form-row">
                     <label for="birthday">Birthday</label>
-                    <input type="date" id="birthday" name="birthday" required>
+                    <input type="date" id="birthday" name="birthday" min="1950-01-01" max="2009-12-31" required>
                 </div>
 
                 <div class="modal-footer">

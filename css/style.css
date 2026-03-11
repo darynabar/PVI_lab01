@@ -578,3 +578,24 @@ td {
     padding: 2px  7px;
     border-radius: 2px;
 }
+
+
+/* Клас для червоної рамки інпута */
+.input-error {
+    border: 2px solid red !important;
+    background-color: #ffeef0;
+}
+
+/* Стиль для тексту помилки */
+.error-message {
+    color: red;
+    font-size: 12px;
+    display: none;
+    /* Ховаємо за замовчуванням */
+    margin: 5px 5px;
+}
+
+/* Коли додаємо цей клас, текст з'являється */
+.error-message.show {
+    display: block;
+}
