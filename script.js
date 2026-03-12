@@ -1,3 +1,15 @@
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('ServiceWorker успішно зареєстровано!', registration.scope);
+      })
+      .catch(error => {
+        console.log('Помилка реєстрації ServiceWorker:', error);
+      });
+  });
+}
+
 const bell = document.querySelector(".bell-icon");
 const message = document.querySelector('.message-dropdown');
 const burger = document.querySelector('.burger');
@@ -107,7 +119,6 @@ if (tableStudents) {
     const birthdayValue = birthdayInput.value;
 
     let isValid = true; 
-
     
     const nameRegex = /^[A-Za-zА-Яа-яІіЇїЄєҐґ']+$/;
 
@@ -171,7 +182,8 @@ if (tableStudents) {
     }
 
     const dateParts = birthdayValue.split('-');
-    const formattedBirthday = `${dateParts[2]}.${dateParts[1]}.${dateParts[0]}`;
+       const formattedBirthday = `${dateParts[2]}.${dateParts[1]}.${dateParts[0]}`;
+        
 
     if (rowToEdit) {
         const cells = rowToEdit.querySelectorAll("td");
@@ -203,7 +215,17 @@ if (tableStudents) {
         const tableBody = document.querySelector('.table tbody');
         tableBody.appendChild(newRow);
     }
-        
+    
+    const studentData =
+        {
+            group: groupValue,
+            firstName: firstNameValue,
+            lastName: lastNameValue,
+            gender: genderValue,
+            birthday: formattedBirthday
+        };
+    console.log("Data student :", JSON.stringify(studentData,null));
+    
     form.reset();
     rowToEdit = null;
     hiddenIdInput.value = "";
@@ -269,7 +291,6 @@ if (tableStudents) {
     
     });
 
-
     tableStudents.addEventListener("click", function (e) {
         if (e.target.type === 'checkbox' && e.target !== mainCheckbox) {
             UpdateCheckbox();
@@ -278,6 +299,7 @@ if (tableStudents) {
         const editBtn = e.target.closest(".editBtn");
         if (editBtn) {
             rowToEdit = editBtn.closest("tr");
+ 
 
             const cells = rowToEdit.querySelectorAll("td");
             const group = cells[1].textContent;
@@ -299,6 +321,16 @@ if (tableStudents) {
             saveBtn.textContent = "Save";
             titleModal.textContent = "Edit student";
             modal.style.display = 'flex';
+
+            const studentData =
+            {
+                group: group,
+                firstName: firstName,
+                lastName: lastName,
+                gender: gender,
+                birthday: formattedDateForInput
+            };
+            console.log("Data student :", JSON.stringify(studentData));
             return;
         }
 
@@ -335,14 +367,3 @@ if (tableStudents) {
     });
 }
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(registration => {
-        console.log('ServiceWorker успішно зареєстровано!', registration.scope);
-      })
-      .catch(error => {
-        console.log('Помилка реєстрації ServiceWorker:', error);
-      });
-  });
-}
