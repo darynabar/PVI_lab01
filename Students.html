@@ -169,13 +169,17 @@
                 </div>
                 <div class="form-row">
                     <label for="firstName">First name</label>
-                    <input type="text" id="firstName" name="firstName" pattern="[A-Za-zА-Яа-яІіЇїЄєҐґ]+" required>
-                    <small id="firstNameError" class="error-message">Введіть коректне ім'я</small>
+                    <div class="input-wrapper">
+                        <input type="text" id="firstName" name="firstName" pattern="[A-Za-zА-Яа-яІіЇїЄєҐґ]+" required>
+                        <small id="firstNameError" class="error-message">Введіть коректне ім'я</small>
+                    </div>
                 </div>
                 <div class="form-row">
                     <label for="lastName">Last name</label>
-                    <input type="text" id="lastName" name="lastName" pattern="[A-Za-zА-Яа-яІіЇїЄєҐґ]+" required>
-                    <small id="lastNameError" class="error-message">Введіть коректне прізвище</small>
+                    <div class="input-wrapper">
+                        <input type="text" id="lastName" name="lastName" pattern="[A-Za-zА-Яа-яІіЇїЄєҐґ]+" required>
+                        <small id="lastNameError" class="error-message">Введіть коректне прізвище</small>
+                    </div>
                 </div>
                 <div class="form-row">
                     <label for="gender">Gender</label>

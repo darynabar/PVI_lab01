@@ -87,10 +87,8 @@ if (tableStudents) {
     }
     
    form.addEventListener('submit', function (event) {
-    // 1. Зупиняємо перезавантаження сторінки
     event.preventDefault();
 
-    // 2. Зчитуємо ВСІ дані з форми
     const firstNameInput = document.getElementById('firstName');
     const firstNameError = document.getElementById('firstNameError');
     const firstNameValue = firstNameInput.value.trim();
@@ -110,10 +108,9 @@ if (tableStudents) {
 
     let isValid = true; 
 
-    // 3. ВАЛІДАЦІЯ КОЖНОГО ПОЛЯ
+    
     const nameRegex = /^[A-Za-zА-Яа-яІіЇїЄєҐґ']+$/;
 
-    // Перевірка імені
     if (!nameRegex.test(firstNameValue) || firstNameValue.length < 2) {
         firstNameInput.classList.add('input-error');
         if(firstNameError) firstNameError.classList.add('show');        
@@ -123,7 +120,6 @@ if (tableStudents) {
         if(firstNameError) firstNameError.classList.remove('show');        
     }
 
-    // Перевірка прізвища
     if (!nameRegex.test(lastNameValue) || lastNameValue.length < 2) {
         lastNameInput.classList.add('input-error');
         if(lastNameError) lastNameError.classList.add('show');        
@@ -133,7 +129,6 @@ if (tableStudents) {
         if(lastNameError) lastNameError.classList.remove('show');        
     }
 
-    // Перевірка групи
     if (groupValue === "") {
         groupInput.classList.add('input-error');
         isValid = false;
@@ -141,7 +136,6 @@ if (tableStudents) {
         groupInput.classList.remove('input-error');
     }
 
-    // Перевірка статі
     if (genderValue === "") {
         genderInput.classList.add('input-error');
         isValid = false;
@@ -149,7 +143,6 @@ if (tableStudents) {
         genderInput.classList.remove('input-error');
     }
 
-    // Перевірка дати
     if (birthdayValue === "") {
         birthdayInput.classList.add('input-error');
         isValid = false;
@@ -157,12 +150,10 @@ if (tableStudents) {
         birthdayInput.classList.remove('input-error');
     }
 
-    // Якщо хоч одне поле неправильне - зупиняємо код тут!
     if (!isValid) {
         return; 
     }
 
-    // === 4. ЯКЩО ВСЕ ДОБРЕ - СТВОРЮЄМО СТУДЕНТА ===
     
     const studentFullName = `${lastNameValue} ${firstNameValue}`;
     
@@ -182,7 +173,6 @@ if (tableStudents) {
     const dateParts = birthdayValue.split('-');
     const formattedBirthday = `${dateParts[2]}.${dateParts[1]}.${dateParts[0]}`;
 
-    // Якщо ми редагуємо студента
     if (rowToEdit) {
         const cells = rowToEdit.querySelectorAll("td");
         cells[1].textContent = groupValue; // Використовуємо groupValue
@@ -193,7 +183,6 @@ if (tableStudents) {
         const statusCircle = cells[5].querySelector('.status-circle');
         statusCircle.className = `status-circle ${statusClass}`;
     } 
-    // Якщо створюємо нового
     else {
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
@@ -211,12 +200,10 @@ if (tableStudents) {
         </td>
         `;
         
-        // Знаходимо таблицю і додаємо рядок
         const tableBody = document.querySelector('.table tbody');
         tableBody.appendChild(newRow);
     }
         
-    // 5. Очищення і закриття
     form.reset();
     rowToEdit = null;
     hiddenIdInput.value = "";
@@ -265,7 +252,6 @@ if (tableStudents) {
     cancelBtn.addEventListener("click", function () {
         modal.style.display = "none";
     });
-    // Закриття при кліку поза вікном
     window.onclick = (event) => {
         if (event.target == modal) closeModal();
     };
@@ -275,12 +261,10 @@ if (tableStudents) {
     
         const studentCheckboxes = document.querySelectorAll('tbody input[type="checkbox"]');
     
-        // Перебираємо всі чекбокси і ставимо їм такий самий стан, як у головного
         studentCheckboxes.forEach(function (checkbox) {
             checkbox.checked = mainCheckbox.checked;
         });
 
-        // Оновлюємо кнопку видалення
         UpdateCheckbox();
     
     });

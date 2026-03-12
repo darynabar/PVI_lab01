@@ -599,3 +599,13 @@ td {
 .error-message.show {
     display: block;
 }
+
+.input-wrapper
+{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+input{
+    width: 100%;
+}

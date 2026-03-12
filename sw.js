@@ -2,11 +2,11 @@ const CACHE_NAME = 'students-cache-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/style.css',   
+  './css/style.css',   
     '/script.js',
     './Students.html',
     './Tasks.html',
-  './avatar.jpg',
+  './image/avatar.jpg',
   './Messages.html',
   './manifest.json',
   './css/icon-192.png',
