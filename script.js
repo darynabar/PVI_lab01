@@ -133,26 +133,25 @@ if (tableStudents) {
 
     let isValid = true; 
     
-    const nameRegex = /^[A-Za-zА-Яа-яІіЇїЄєҐґ\-]+$/;
+    const nameRegex = /^[A-Za-zА-Яа-яІіЇїЄєҐґ]+(?:-[A-Za-zА-Яа-яІіЇїЄєҐґ]+)*$/;
 
     if (!nameRegex.test(firstNameValue) || firstNameValue.length < 2) {
         firstNameInput.classList.add('input-error');
-        if(firstNameError) firstNameError.classList.add('show');        
+        if (firstNameError) firstNameError.classList.add('show');        
         isValid = false; 
     } else {
         firstNameInput.classList.remove('input-error');
-        if(firstNameError) firstNameError.classList.remove('show');        
+        if (firstNameError) firstNameError.classList.remove('show');        
     }
 
     if (!nameRegex.test(lastNameValue) || lastNameValue.length < 2) {
         lastNameInput.classList.add('input-error');
-        if(lastNameError) lastNameError.classList.add('show');        
+        if (lastNameError) lastNameError.classList.add('show');        
         isValid = false; 
     } else {
         lastNameInput.classList.remove('input-error');
-        if(lastNameError) lastNameError.classList.remove('show');        
+        if (lastNameError) lastNameError.classList.remove('show');        
     }
-
     if (groupValue === "") {
         groupInput.classList.add('input-error');
         isValid = false;
