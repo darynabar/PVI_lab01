@@ -79,7 +79,7 @@
                 <aside>
                     <nav class="nav-sitebar" aria-label="Main Navigation">
                         <a class="link-sitebar" href="index.html">Dashboard</a>
-                        <a class="link-sitebar active-menu" href="Students.html" aria-current="page">Students</a>
+                        <a class="link-sitebar active-menu" href="Students.html" aria-current="page">Student</a>
                         <a class="link-sitebar" href="Tasks.html">Tasks</a>
                     </nav>
                 </aside>
@@ -153,7 +153,7 @@
                 <h2 class="modal-title" id="modalTitle">Add student</h2>
                 <button class="close-modal-btn" id="closeModal" aria-label="Close modal">&times;</button>
             </div>
-            <form id="addStudentForm"  class="modal-form" autocomplete="off"  novalidate>
+            <form id="addStudentForm"  class="modal-form" autocomplete="off" novalidate>
                 <input type="hidden" id="studentId" name="id" value="">
                 <div class="form-row">
                     <label for="group">Group</label>
@@ -192,7 +192,10 @@
                 </div>
                 <div class="form-row">
                     <label for="birthday">Birthday</label>
-                    <input type="date" id="birthday" name="birthday" min="1950-01-01" max="2009-12-31" required>
+                    <div class="input-wrapper">
+                        <input type="date" id="birthday" name="birthday" min="1950-01-01" max="2009-12-31" required>
+                        <small id="birthdayError"class="data-error" >Введіть дату в межах 1950-2011</small>
+                    </div>
                 </div>
 
                 <div class="modal-footer">

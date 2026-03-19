@@ -599,6 +599,20 @@ td {
 .error-message.show {
     display: block;
 }
+.data-error
+{
+    color: red;
+    font-size: 12px;
+    display: none;
+    /* Ховаємо за замовчуванням */
+    margin: 5px 5px;
+
+}
+
+.data-error.show
+{
+    display: block;
+}
 
 .input-wrapper
 {

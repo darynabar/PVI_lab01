@@ -84,6 +84,18 @@ if (tableStudents) {
     const allDeleteBtn = document.getElementById('allDelete-button');
     let rowToDelete = null;
     let rowToEdit = null;
+    const birthdayInput = document.getElementById('birthday');
+    if (birthdayInput) {
+        const today = new Date();
+        const minAge = 15; 
+        const maxAge = 100; 
+
+        const maxDate = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate());
+        const minDate = new Date(today.getFullYear() - maxAge, today.getMonth(), today.getDate());
+
+        birthdayInput.max = maxDate.toISOString().split('T')[0];
+        birthdayInput.min = minDate.toISOString().split('T')[0];
+    }
 
     const okWarningBtn = document.querySelector(".btn-Ok");
     const delBtn = document.querySelector('.delete-all-btn');
@@ -117,10 +129,11 @@ if (tableStudents) {
 
     const birthdayInput = document.getElementById('birthday');
     const birthdayValue = birthdayInput.value;
+    const birthdayNameError = document.getElementById('birthdayError');
 
     let isValid = true; 
     
-    const nameRegex = /^[A-Za-zА-Яа-яІіЇїЄєҐґ']+$/;
+    const nameRegex = /^[A-Za-zА-Яа-яІіЇїЄєҐґ\-']+$/;
 
     if (!nameRegex.test(firstNameValue) || firstNameValue.length < 2) {
         firstNameInput.classList.add('input-error');
@@ -152,14 +165,20 @@ if (tableStudents) {
         isValid = false;
     } else {
         genderInput.classList.remove('input-error');
-    }
+       }
+    const selectedDate = new Date(birthdayValue);
 
-    if (birthdayValue === "") {
-        birthdayInput.classList.add('input-error');
+   if (birthdayValue === "") {
+       birthdayInput.classList.add('input-error');
+        isValid = false;
+    } else if (selectedDate.getFullYear() > 2010) {
+       birthdayInput.classList.add('input-error');
+        birthdayNameError.classList.add('show');  
+       
         isValid = false;
     } else {
         birthdayInput.classList.remove('input-error');
-    }
+    }  
 
     if (!isValid) {
         return; 
