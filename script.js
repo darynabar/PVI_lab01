@@ -133,8 +133,8 @@ if (tableStudents) {
 
     let isValid = true; 
     
-    const nameRegex = /^[A-Za-zА-Яа-яІіЇїЄєҐґ]+(?:-[A-Za-zА-Яа-яІіЇїЄєҐґ]+)*$/;
-
+    const nameRegex = /^[A-Za-zА-Яа-яІіЇїЄєҐґ]+(?:[-'’ʼ][A-Za-zА-Яа-яІіЇїЄєҐґ]+)*$/;
+       
     if (!nameRegex.test(firstNameValue) || firstNameValue.length < 2) {
         firstNameInput.classList.add('input-error');
         if (firstNameError) firstNameError.classList.add('show');        
